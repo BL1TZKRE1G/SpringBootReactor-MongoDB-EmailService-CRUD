@@ -29,6 +29,13 @@ public class MailController {
     }
 
     public String sendApprovalMail(ApprovalRequest approvalRequest) {
-
+        try {
+            log.info("Sending Approval Mail for: {}", approvalRequest.getFirstName());
+            mailService.sendApprovalMail(approvalRequest);
+        } catch (Exception e) {
+            log.info("Exception Encountered");
+            return "ABORTED";
+        }
+        return "Mail Sent Successfully\nPort terminated for further use";
     }
 }
